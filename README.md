@@ -1,9 +1,6 @@
 # JIRA properties labeler on Pull Request
 
-This action adds JIRA issue properties as labels in your Pull Request.
-You can customize which properties you want to add as labels [here](https://github.com/xserrat/pr-jira-properties-labeler#issue_properties):
-
-* `priority`: Shows the name of the priority defined in the Jira issue.  
+This action adds JIRA issue type as label in your Pull Request.
 
 ## Usage
 
@@ -18,6 +15,8 @@ on:
 jobs:
   jira_labels:
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
     name: Label Pull Request with Jira properties
     steps:
       - name: Label with JIRA issue properties
@@ -27,7 +26,6 @@ jobs:
           JIRA_ENCODED_TOKEN: ${{ secrets.JIRA_ENCODED_TOKEN }}
           JIRA_URI: ${{ secrets.JIRA_URI }}
           regexp_jira_issue_code_on_pr_title: '^([A-Z]{3}-[0-9]{4}).*'
-          issue_properties: '[priority]'
 ```
 
 ## Inputs
@@ -60,15 +58,9 @@ It's the URI of JIRA used to enter through the browser. Example: `https://mycomp
 
 **Required**
 The regular expression to obtain the issue code of your pull request from the PR title.
-Default `"^([A-Z]{3}-[0-9]{4}).*"`.
+Default `"^([A-Z]{3}-[0-9]{5}).*"`.
 
-Using the default value, the action will parse those PRs with a title like: "**ABC-1234** Feature to do something".
-
-### `issue_properties`
-**Required**
-A list of properties you want to add as labels in your Pull Request.
-
-Right now, the only property available is `priority` but in the future you can select more.
+Using the default value, the action will parse those PRs with a title like: "**ETS-12354** Feature to do something".
 
 ### Example
 

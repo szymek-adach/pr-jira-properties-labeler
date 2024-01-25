@@ -1,5 +1,5 @@
 name: 'JIRA properties labeler on Pull Request'
-author: 'Xavier Serrat'
+author: 'Xavier Serrat, forked and updated by Szymek Adach'
 description: 'Label a Pull Request using JIRA issue properties'
 inputs:
   GITHUB_TOKEN:
@@ -12,13 +12,9 @@ inputs:
     description: 'Jira encoded token to access to the Jira API'
     required: true
   regexp_jira_issue_code_on_pr_title:
-    description: 'Regular expression to identify the JIRA issue code on a PR title'
+    description: 'Regular expression to identify the JIRA issue code on a PR titlem e.g. ETS-12345'
     required: false
-    default: '([A-Z]{3}-[0-9]{4}).*'
-  issue_properties:
-    description: 'The list of issue properties to add in the PR'
-    required: false
-    default: '[priority]'
+    default: '([A-Z]{3}-[0-9]{5}).*'
 
 runs:
   using: 'docker'
@@ -28,7 +24,6 @@ runs:
     - ${{ inputs.JIRA_ENCODED_TOKEN }}
     - ${{ inputs.JIRA_URI }}
     - ${{ inputs.regexp_jira_issue_code_on_pr_title }}
-    - ${{ inputs.issue_properties }}
 branding:
   icon: 'tag'
   color: 'blue'

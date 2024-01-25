@@ -8,7 +8,6 @@ action::setInputVariables() {
     JIRA_ENCODED_TOKEN=$2
     JIRA_URI=$3
     REGEXP_JIRA_ISSUE_CODE_ON_PR_TITLE=$4
-    ISSUE_PROPERTIES=$5
 }
 
 action::input::githubToken() {
@@ -33,10 +32,6 @@ action::input::regexpJiraCodeOnPrTitle() {
     echo "$input_regexp"
 }
 
-action::input:issueProperties() {
-    echo "$ISSUE_PROPERTIES"
-}
-
 action::getJiraCodeFromPRTitle() {
     local pr_title
     pr_title=$(github::getPullRequestTitle)
@@ -52,12 +47,12 @@ action::getJiraCodeFromPRTitle() {
     echo "$jira_code"
 }
 
-action::addPriorityLabel() {
+action::addIssueTypeLabel() {
     local issue_code=$1
     local issue_prio
-    issue_prio=$(jira::getPriorityOf "$issue_code")
+    issue_prio=$(jira::getIssueTypeOf "$issue_code")
 
-    echo "Prio: $issue_prio"
+    echo "Issue type: $issue_prio"
 
     github::addLabelsToThePR "$issue_prio"
 }
@@ -79,5 +74,5 @@ action::run() {
     fi
 
     echo "Adding priority label to the PR..."
-	  action::addPriorityLabel "$issue_code"
+	  action::addIssueTypeLabel "$issue_code"
 }
