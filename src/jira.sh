@@ -68,11 +68,11 @@ jira::getIssueTypeOf() {
     local issue_type_id
     issue_type_id=$(echo "$issue" | jq --raw-output .fields.issuetype.id)
 
-    if [[ $issue_type_id -eq 10010]];then
+    if [[ $issue_type_id -eq 10010 ]];then
       echo "story"
-    elif [[ $issue_type_id -eq 10127]];then
+    elif [[ $issue_type_id -eq 10127 ]];then
       echo "maintenance"
-    elif [[ $issue_type_id -eq 10132]];then
+    elif [[ $issue_type_id -eq 10132 ]];then
       echo "internal"
     else
       echo "story"
