@@ -49,12 +49,12 @@ action::getJiraCodeFromPRTitle() {
 
 action::addIssueTypeLabel() {
     local issue_code=$1
-    local issue_prio
-    issue_prio=$(jira::getIssueTypeOf "$issue_code")
+    local issue_type
+    issue_type=$(jira::getIssueTypeOf "$issue_code")
 
-    echo "Issue type: $issue_prio"
+    echo "Issue type: $issue_type"
 
-    github::addLabelsToThePR "$issue_prio"
+    github::addLabelsToThePR "$issue_type"
 }
 
 action::run() {
@@ -73,6 +73,6 @@ action::run() {
       exit 0
     fi
 
-    echo "Adding priority label to the PR..."
+    echo "Adding issue type label to the PR..."
 	  action::addIssueTypeLabel "$issue_code"
 }
