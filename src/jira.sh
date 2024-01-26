@@ -69,12 +69,12 @@ jira::getIssueTypeOf() {
     issue_type_id=$(echo "$issue" | jq --raw-output .fields.issuetype.id)
 
     if [[ $issue_type_id -eq 10010 ]];then
-      echo "story"
+      echo "sprint"
     elif [[ $issue_type_id -eq 10127 ]];then
-      echo "maintenance"
+      echo "non-sprint"
     elif [[ $issue_type_id -eq 10132 ]];then
-      echo "internal"
+      echo "non-sprint"
     else
-      echo "story"
+      echo "non-sprint"
     fi
 }
