@@ -73,6 +73,6 @@ action::run() {
       exit 0
     fi
 
-    echo "Adding issue type label to the PR..."
+    echo "Adding issue type label $issue_code to the PR..."
 	  action::addIssueTypeLabel "$issue_code"
 }

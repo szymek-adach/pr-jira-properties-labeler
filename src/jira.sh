@@ -50,6 +50,7 @@ jira::makeRequest() {
     if [[ $http_code -eq 200 ]];then
       echo "$jira_issue"
     else
+      echo "Could not fetch issue type from JIRA. Response: $response"
       echo false
     fi
 }
